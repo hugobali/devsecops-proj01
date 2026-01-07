@@ -19,7 +19,7 @@ jobs:
     - name: Install deps
       run: |
         pip install -r requirements.txt
-        pip install pytest flake8
+        pip install pytest flake8 httpx
 
     - name: Lint
       run: flake8 app
