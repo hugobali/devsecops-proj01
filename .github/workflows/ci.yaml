@@ -53,3 +53,11 @@ jobs:
       with:
         image: ${{ env.IMAGE }}
         output: spdx-json=sbom.spdx.json
+
+    - name: Install Syft CLI
+      run: |
+        curl -sSfL https://raw.githubusercontent.com/anchore/syft/main/install.sh | sh -s -- -b /usr/local/bin
+
+    - name: Run Syft and generate sbom file
+      run: |
+        /usr/local/bin/syft ${{ env.IMAGE }} -o spdx-json >  image-sbom.spdx.json
