@@ -45,6 +45,5 @@ jobs:
       with:
         scan-type: fs
         scan-ref: .
-        format: sarif
         severity: HIGH,CRITICAL
         exit-code: 1
