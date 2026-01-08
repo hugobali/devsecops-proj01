@@ -47,3 +47,9 @@ jobs:
         scan-ref: .
         severity: HIGH,CRITICAL
         exit-code: 1
+
+    - name: Generate SBOM
+      uses: anchore/syft-action@main
+      with:
+        image: ${{ env.IMAGE }}
+        output: spdx-json=sbom.spdx.json
