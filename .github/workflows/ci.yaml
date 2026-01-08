@@ -48,12 +48,6 @@ jobs:
         severity: HIGH,CRITICAL
         exit-code: 1
 
-    - name: Generate SBOM
-      uses: anchore/syft@v1.40.0
-      with:
-        image: ${{ env.IMAGE }}
-        output: spdx-json=sbom.spdx.json
-
     - name: Install Syft CLI
       run: |
         curl -sSfL https://raw.githubusercontent.com/anchore/syft/main/install.sh | sh -s -- -b /usr/local/bin
