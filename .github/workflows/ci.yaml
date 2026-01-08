@@ -4,6 +4,9 @@ on:
   push:
     branches: [ "main" ]
 
+env:
+  IMAGE: ghcr.io/hello-python-api:latest
+
 jobs:
   build:
     runs-on: ubuntu-latest
@@ -16,13 +19,23 @@ jobs:
       with:
         python-version: "3.12"
 
-    - name: Install deps
+    - name: Install Python deps
       run: |
         pip install -r requirements.txt
         pip install pytest flake8 httpx
 
-    - name: Lint
+    - name: Lint with Flake8
       run: flake8 app
 
-    - name: Test
+    - name: Test using Pytest
       run: PYTHONPATH=. pytest
+
+    - name: Build image
+      run: docker build -t $IMAGE .
+
+    - name: Trivy Securty scan
+      uses: aquasecurity/trivy-action@0.20.0
+      with:
+        image-ref: ${{ env.IMAGE }}
+        severity: HIGH,CRITICAL
+        exit-code: 1
