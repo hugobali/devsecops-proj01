@@ -5,7 +5,7 @@ on:
     branches: [ "main" ]
 
 env:
-  IMAGE: davioletx/hello-python-api:latest
+  IMAGE: davioletx/hello-python-api:${{ github.sha }}
 
 jobs:
   build:
