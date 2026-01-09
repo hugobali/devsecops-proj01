@@ -70,3 +70,9 @@ jobs:
 
     - name: Push image to DockerHub
       run: docker push $IMAGE
+
+    - name: Sign image (Cosign keyless)
+      uses: sigstore/cosign-installer@v3
+
+    - name: Cosign sign
+      run: cosign sign $IMAGE
