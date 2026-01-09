@@ -5,7 +5,7 @@ on:
     branches: [ "main" ]
 
 env:
-  IMAGE: ghcr.io/hello-python-api:latest
+  IMAGE: davioletx/hello-python-api:latest
 
 jobs:
   build:
@@ -61,3 +61,6 @@ jobs:
       with:
         name: image-sbom
         path: image-sbom.spdx.json
+
+    - name: Login Docker Registry
+      run: echo "${{ secrets.DOCKER_REGISTRY_TOKEN }}" | docker login -u $DOCKER_REGISTRY_USER --password-stdin
