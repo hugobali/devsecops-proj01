@@ -5,7 +5,7 @@ on:
     branches: [ "main" ]
 
 env:
-  IMAGE: davioletx/hello-python-api@${{ github.sha }}
+  IMAGE: davioletx/hello-python-api
 
 jobs:
   build:
@@ -75,4 +75,7 @@ jobs:
       uses: sigstore/cosign-installer@v3
 
     - name: Cosign sign
-      run: cosign sign $IMAGE
+      run: |
+        DIGEST="${{ steps.build.outputs.digest }}"
+
+        cosign sign $IMAGE@$DIGEST
