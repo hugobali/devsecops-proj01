@@ -105,7 +105,8 @@ jobs:
       env:
         COSIGN_EXPERIMENTAL: "true"
       run: |
-        cosign verify docker.io/${{ vars.DOCKER_REGISTRY_USER }}/${{ env.IMAGE }}:latest \
-          --certificate-identity "github.com" \
-          --certificate-oidc-issuer "https://token.actions.githubusercontent.com"
+        cosign verify \
+          --certificate-oidc-issuer https://token.actions.githubusercontent.com \
+          --certificate-identity-regexp "https://github.com/${{ github.repository }}/.github/workflows/.*" \
+          docker.io/${{ vars.DOCKER_REGISTRY_USER }}/${{ env.IMAGE }}:latest
 
