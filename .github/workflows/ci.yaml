@@ -10,7 +10,7 @@ permissions:
   id-token: write   # Mandatory for cosign keyless
 
 env:
-  IMAGE: davioletx/hello-python-api
+  IMAGE: hello-python-api
 
 jobs:
   build:
@@ -81,17 +81,17 @@ jobs:
       with:
         push: true
         tags: |
-          ${{ env.IMAGE }}:latest
+          docker.io/${{ vars.DOCKER_REGISTRY_USER }}/${{ env.IMAGE }}:latest
 
     - name: Sign image (Cosign keyless)
       uses: sigstore/cosign-installer@v3
 
 
-    - name: Login to Docker Hub for Cosign
-      env:
-        COSIGN_DOCKER_USERNAME: ${{ vars.DOCKER_REGISTRY_USER  }}
-        COSIGN_DOCKER_PASSWORD: ${{ secrets.DOCKER_REGISTRY_TOKEN }}
-      run: echo "Cosign auth configured"
+    #- name: Login to Docker Hub for Cosign
+    #  env:
+    #    COSIGN_DOCKER_USERNAME: ${{ vars.DOCKER_REGISTRY_USER  }}
+    #    COSIGN_DOCKER_PASSWORD: ${{ secrets.DOCKER_REGISTRY_TOKEN }}
+    #  run: echo "Cosign auth configured"
 
 
     - name: Sign image with Cosign (keyless)
