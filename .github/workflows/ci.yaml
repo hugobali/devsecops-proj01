@@ -87,11 +87,11 @@ jobs:
       uses: sigstore/cosign-installer@v3
 
 
-    #- name: Login to Docker Hub for Cosign
-    #  env:
-    #    COSIGN_DOCKER_USERNAME: ${{ vars.DOCKER_REGISTRY_USER  }}
-    #    COSIGN_DOCKER_PASSWORD: ${{ secrets.DOCKER_REGISTRY_TOKEN }}
-    #  run: echo "Cosign auth configured"
+    - name: Login to Docker Hub for Cosign
+      env:
+        COSIGN_DOCKER_USERNAME: ${{ vars.DOCKER_REGISTRY_USER  }}
+        COSIGN_DOCKER_PASSWORD: ${{ secrets.DOCKER_REGISTRY_TOKEN }}
+      run: echo "Cosign auth configured"
 
 
     - name: Sign image with Cosign (keyless)
