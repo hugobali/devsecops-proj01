@@ -4,6 +4,11 @@ on:
   push:
     branches: [ "main" ]
 
+permissions:
+  contents: read
+  packages: write
+  id-token: write   # Mandatory for cosign keyless
+
 env:
   IMAGE: davioletx/hello-python-api
 
@@ -74,8 +79,9 @@ jobs:
     - name: Sign image (Cosign keyless)
       uses: sigstore/cosign-installer@v3
 
-    - name: Cosign sign
+    - name: Sign image with Cosign (keyless)
+      env:
+        COSIGN_EXPERIMENTAL: "true"
       run: |
-        DIGEST="${{ steps.build.outputs.digest }}"
-
-        cosign sign $IMAGE@$DIGEST
+        cosign sign \
+          docker.io/${{ secrets.DOCKERHUB_USERNAME }}/$IMAGE@${{ steps.build.outputs.digest }}
