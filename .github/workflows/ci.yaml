@@ -100,3 +100,12 @@ jobs:
       run: |
         cosign sign --yes \
           docker.io/${{ vars.DOCKER_REGISTRY_USER }}/${{ env.IMAGE }}@${{ steps.build.outputs.digest }}
+
+    - name: Verify the container image signature
+      env:
+        COSIGN_EXPERIMENTAL: "true"
+      run: |
+        cosign verify docker.io/${{ vars.DOCKER_REGISTRY_USER }}/${{ env.IMAGE }}:latest \
+          --certificate-identity "github.com" \
+          --certificate-oidc-issuer "https://token.actions.githubusercontent.com"
+
