@@ -98,5 +98,5 @@ jobs:
       env:
         COSIGN_EXPERIMENTAL: "true"
       run: |
-        cosign sign \
+        cosign sign --yes \
           docker.io/${{ vars.DOCKER_REGISTRY_USER }}/${{ env.IMAGE }}@${{ steps.build.outputs.digest }}
