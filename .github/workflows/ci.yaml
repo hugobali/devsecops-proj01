@@ -81,7 +81,7 @@ jobs:
       with:
         push: true
         tags: |
-          docker.io/${{ vars.DOCKER_REGISTRY_USER }}/$IMAGE:latest
+          docker.io/${{ vars.DOCKER_REGISTRY_USER }}/${{ env.IMAGE }}:latest
 
     - name: Sign image (Cosign keyless)
       uses: sigstore/cosign-installer@v3
@@ -91,4 +91,4 @@ jobs:
         COSIGN_EXPERIMENTAL: "true"
       run: |
         cosign sign \
-          docker.io/${{ vars.DOCKER_REGISTRY_USER }}/$IMAGE@${{ steps.build.outputs.digest }}
+          docker.io/${{ vars.DOCKER_REGISTRY_USER }}/${{ env.IMAGE }}@${{ steps.build.outputs.digest }}
