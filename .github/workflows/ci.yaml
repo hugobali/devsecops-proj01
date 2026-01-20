@@ -38,20 +38,20 @@ jobs:
     - name: Build image
       run: docker build -t $IMAGE .
 
-    - name: Trivy Securty scan for images
-      uses: aquasecurity/trivy-action@master
-      with:
-        image-ref: ${{ env.IMAGE }}
-        severity: HIGH,CRITICAL
-        exit-code: 1
-
-    #- name: Trivy Securty scan for Files
+    #- name: Trivy Securty scan for images
     #  uses: aquasecurity/trivy-action@master
     #  with:
-    #    scan-type: fs
-    #    scan-ref: .
-    #   severity: HIGH,CRITICAL
+    #    image-ref: ${{ env.IMAGE }}
+    #    severity: HIGH,CRITICAL
     #    exit-code: 1
+
+    - name: Trivy Securty scan for Files
+      uses: aquasecurity/trivy-action@master
+      with:
+        scan-type: fs
+        scan-ref: .
+        severity: HIGH,CRITICAL
+        exit-code: 1
 
     - name: Install Syft CLI
       run: |
