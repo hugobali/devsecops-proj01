@@ -38,12 +38,12 @@ jobs:
     - name: Build image
       run: docker build -t $IMAGE .
 
-    #- name: Trivy Securty scan for images
-    #  uses: aquasecurity/trivy-action@master
-    #  with:
-    #    image-ref: ${{ env.IMAGE }}
-    #    severity: HIGH,CRITICAL
-    #    exit-code: 1
+    - name: Trivy Securty scan for images
+      uses: aquasecurity/trivy-action@master
+      with:
+        image-ref: ${{ env.IMAGE }}
+        severity: HIGH,CRITICAL
+        exit-code: 1
 
     - name: Trivy Securty scan for Files
       uses: aquasecurity/trivy-action@master
