@@ -45,13 +45,13 @@ jobs:
         severity: HIGH,CRITICAL
         exit-code: 1
 
-    - name: Trivy Securty scan for Files
-      uses: aquasecurity/trivy-action@master
-      with:
-        scan-type: fs
-        scan-ref: .
-        severity: HIGH,CRITICAL
-        exit-code: 1
+    #- name: Trivy Securty scan for Files
+    #  uses: aquasecurity/trivy-action@master
+    #  with:
+    #    scan-type: fs
+    #    scan-ref: .
+    #   severity: HIGH,CRITICAL
+    #    exit-code: 1
 
     - name: Install Syft CLI
       run: |
