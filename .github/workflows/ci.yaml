@@ -42,7 +42,7 @@ jobs:
       run: PYTHONPATH=. pytest
 
     - name: Lint Dockerfile
-      uses: hadolint/hadolint-action@v3
+      uses: hadolint/hadolint-action@v3.3.0
       with:
         dockerfile: Dockerfile
         # hadolint_ignore = "" ## If you need  to ignore rules
