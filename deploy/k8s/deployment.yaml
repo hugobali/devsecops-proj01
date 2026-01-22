@@ -13,8 +13,18 @@ spec:
       labels:
         app: hello-api
     spec:
+      # SecurityContext suggested for Trivy scan
+      securityContext:
+          readOnlyRootFilesystem: true
+          runAsNonRoot: true
+          runAsUser: 1000 # Use a specific non-root UID (e.g., 1000)
+          runAsGroup: 3000 # Optional: Specify a non-root GID
+          fsGroup: 2000 # Optional: Ensures correct volume permissions
       containers:
       - name: hello-api
         image: docker.io/davioletx/hello-python-api:latest
+        securityContext:
+          readOnlyRootFilesystem: true
+          allowPrivilegeEscalation: false
         ports:
         - containerPort: 8000
