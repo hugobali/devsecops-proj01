@@ -41,6 +41,12 @@ jobs:
     - name: Test using Pytest
       run: PYTHONPATH=. pytest
 
+    - name: Lint Dockerfile
+      uses: hadolint/hadolint-action@v3
+      with:
+        dockerfile: Dockerfile
+        # hadolint_ignore = "" ## If you need  to ignore rules
+
     - name: Build image
       run: docker build -t $IMAGE .
 
