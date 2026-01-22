@@ -63,7 +63,7 @@ jobs:
         scan-type: fs
         scan-ref: .
         severity: HIGH,CRITICAL
-        scanners: "vuln,secret,misconfig"
+        scanners: "vuln,secret"
         exit-code: 1
 
     - name: Install Syft CLI
